@@ -5,7 +5,6 @@ import terminal
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import ThreadedFTPServer
-from threading import Thread
 
 class FTPServer:
 

@@ -7,7 +7,8 @@ class FTPClient:
 	password = None
 	host = None
 	ftp = None
-	_commands = ('CWD', 'CDUP', 'LIST', 'NLST', 'STAT', 'MLSD', 'MLST', 
+	return_value = None
+	commands = ('CWD', 'CDUP', 'LIST', 'NLST', 'STAT', 'MLSD', 'MLST', 
 				 'SIZE', 'RETR', 'APPE', 'DELE', 'RMD', 'RNFR', 'RNTO', 
 				 'MKD', 'STOR', 'STOU', 'SITE CHMOD', 'SITE MFMT')
 	
@@ -28,11 +29,14 @@ class FTPClient:
 		# Lists files in a directory
 		self.ftp.dir()
 		
+	def get_return_value(self):
+		return self.return_value
+		
 	def execute_cmd(self, cmd):
 		cmd = cmd.upper()
 		if cmd == 'LIST':
 			self.ftp.dir()
 		elif cmd == 'EXIT':
-			return 'exit'
+			self.return_value = 'exit'
 		else:
 			print('Command not found')
