@@ -5,9 +5,11 @@ last version the user can only display files on a directory.
 	
 # Setting up virtualenv
 Use the command: 
+
 	virtualenv -p python[version] venv
 The version used in this project is 3.6.5
 	
 # Setting up library dependencies
-Use the command: 
+Use the command:
+	
 	pip install -r requirements.txt
