@@ -14,7 +14,8 @@ def main():
 	if is_server == True:
 		
 		user = display.display_server_config_sequence()
-	
+		
+		# The server receives a user account in order to initialize
 		server = ftp_server.FTPServer(user)
 		
 		print('\nThe server will start. In order to shut it down use Ctrl-C (NT) or Ctrl-D (POSIX)\n')
@@ -33,7 +34,10 @@ def main():
 		
 		while True:
 			cmd = display.get_user_input()
-			listener = client.execute_cmd(cmd)
+			
+			# Sometimes, a command might return a statement
+			client.execute_cmd(cmd)
+			listener = client.get_return_value()
 			print('\n')
 			if listener == 'exit':
 				break

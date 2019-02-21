@@ -4,22 +4,22 @@ import host
 
 class Terminal:
 	
-	_user = None
-	_host = None
-	_login_msg = None
-	_logout_msg = None
+	user = None
+	host = None
+	login_msg = None
+	logout_msg = None
 	
 	def __init__(self):
 	    
-		self._user = user.User()
-		self._host = host.Host()
+		self.user = user.User()
+		self.host = host.Host()
 	
 	# Shows welcome message
 	def display_startup_sequence(self):
 		
 		print('Python FTP Manager')
 		print('---------------------------------')
-		print('Version 0.7.1, by CodeArch')
+		print('Version 0.7.2, by CodeArch')
 		print('\n')
 		
 	# Asks if the user wants to host a server or connect to an existing one
@@ -32,30 +32,32 @@ class Terminal:
 		print('\n')
 		print('Insert option: ', end='')
 		
-		_user_option = input()
+		user_option = input()
 		
-		if _user_option == '1':
-			self._user.is_server = True
-		elif _user_option == '2':
-			self._user.is_server = False
+		if user_option == '1':
+			self.user.is_server = True
+		elif user_option == '2':
+			self.user.is_server = False
 		
-		return self._user.is_server
+		return self.user.is_server
 		
 	def display_server_config_sequence(self):
+		
 		print('Insert username: ', end='')
-		self._user.username = input()
+		self.user.username = input()
+		
 		print('Insert password: ', end='')
-		self._user.password = input()
+		self.user.password = input()
 		
 		while True:
 			
 			try:
 				print('Insert directory to share: ', end='')
-				self._user.dir_ = input()
+				self.user.dir_ = input()
 				
 				# Checking if a directory exists. If false, raise NotADirectoryError
 				# If it exists, break the loop and continue operations
-				if os.path.isdir(self._user.dir_) == False:
+				if os.path.isdir(self.user.dir_) == False:
 					raise NotADirectoryError from OSError
 				break
 			except NotADirectoryError:
@@ -69,13 +71,13 @@ class Terminal:
 			if access_level == 'R':
 				
 				# Sets Read Only permissions
-				self._user.permissions = 'elr'
+				self.user.permissions = 'elr'
 				break
 			
 			elif access_level == 'RW':
 				
 				# Sets Read/Write permissions
-				self._user.permissions = 'elradfwMT'
+				self.user.permissions = 'elradfwMT'
 				break
 			
 			else:
@@ -85,12 +87,13 @@ class Terminal:
 				access_level = input().upper()
 		
 		# Returns user account information to be used as hosting parameters
-		return self._user
+		return self.user
 	
 	def display_client_config_sequence(self):
 		
 		print('Insert address (default = 0.0.0.0): ', end='')
 		address = input()
+		
 		print('Insert port (default = 2121): ', end='')
 		port = input()
 		
@@ -101,6 +104,8 @@ class Terminal:
 			port = 2121
 		
 		else:
+			# The statement below will malfunction if the user types a string.
+			# An exception needs to be added here
 			port = int(port)
 		
 		print('Insert username (default = None): ', end='')
@@ -110,12 +115,12 @@ class Terminal:
 		password = input()
 		
 		# Sets all the information necessary in the Host class and returns these values
-		self._host.address = address
-		self._host.port = port
-		self._host.username = username
-		self._host.password = password
+		self.host.address = address
+		self.host.port = port
+		self.host.username = username
+		self.host.password = password
 		
-		return self._host
+		return self.host
 		
 	def get_user_input(self):
 			
