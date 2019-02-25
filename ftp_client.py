@@ -33,10 +33,37 @@ class FTPClient:
 		return self.return_value
 		
 	def execute_cmd(self, cmd):
+		print('\n')
+		
 		cmd = cmd.upper()
+		
 		if cmd == 'LIST':
 			self.ftp.dir()
-		elif cmd == 'EXIT':
+		
+		elif cmd == 'EXIT' or cmd == 'QUIT':
+			self.ftp.quit()
 			self.return_value = 'exit'
+		
+		elif cmd.startswith('CWD'):
+			# Transforms the command in an array, in which the index one contains args
+			cmd = cmd.split(' ')
+			# Takes the argument of the command and changes the directory
+			self.ftp.cwd(cmd[1])
+		
+		elif cmd.startswith('SIZE'):
+			cmd = cmd.split(' ')
+			self.ftp.voidcmd('TYPE I')
+			print('{} bytes'.format(self.ftp.size(cmd[1])))
+		
+		elif cmd == 'HELP':
+			with open('help.txt', 'r') as help_file:
+				line_index = 0
+				for line in help_file:
+					# This is for hiding the help header
+					if line_index <= 3:
+						line_index += 1
+					else:
+						print(line, end='')
+		
 		else:
 			print('Command not found')
