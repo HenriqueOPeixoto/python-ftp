@@ -1,0 +1,11 @@
+WARNING: THIS FILE IS USED BY THE PROGRAM
+DO NOT MODIFY!!!
+================================================
+
+FTP commands help guide:
+
+cwd (pathname) - Changes working directory
+list - Displays a list of folders and files in the current directory
+size (file) - Displays the size (in bytes) of a file
+quit - Shuts the connection down and exits
+exit - Shuts the connection down and exits

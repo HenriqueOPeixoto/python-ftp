@@ -1,4 +1,4 @@
-# python-ftp v0.7.1-alpha
+# python-ftp v0.8.1-alpha
 This project allows users to host or access an FTP server. The implementation of the
 server is pretty much done, but the client-side is still under construction. In the 
 last version the user can only display files on a directory.
