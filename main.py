@@ -40,7 +40,6 @@ def main():
 			# Sometimes, a command might return a statement
 			client.execute_cmd(cmd)
 			listener = client.get_return_value()
-			print('\n')
 			if listener == 'exit':
 				break
 			elif listener == 'help':
