@@ -19,7 +19,7 @@ class Terminal:
 		
 		print('Python FTP Manager')
 		print('---------------------------------')
-		print('Version 0.7.2, by CodeArch')
+		print('Version 0.8.2-alpha, by CodeArch')
 		print('\n')
 		
 	# Asks if the user wants to host a server or connect to an existing one
@@ -121,6 +121,15 @@ class Terminal:
 		self.host.password = password
 		
 		return self.host
+		
+	def display_help_message(self):
+		with open('help.txt', 'r') as help_file:
+			line_index = 0
+			for line in help_file:
+				if line_index <= 3:
+					line_index += 1
+				else:
+					print(line, end='')
 		
 	def get_user_input(self):
 			
