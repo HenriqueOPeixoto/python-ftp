@@ -1,7 +1,11 @@
 # TODO
-* Implentation of the Client's commands
 * Code commenting
 * Manage exceptions
+
+# Changelog v0.8.3
+* Added STOR, DELE, RENAME, RMD and MKD commands
+* The client side is now fully usable (still has some bugs, though)
+* The server now allows file renaming
 
 # Changelog v0.8.2-alpha
 * Giving no or too many arguments on a CWD command now no longer exits the aplication

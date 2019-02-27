@@ -1,8 +1,8 @@
-# python-ftp v0.8.2-alpha
-This project allows users to host or access an FTP server. The implementation of the
-server is pretty much done, but the client-side is still under construction. In the 
-last version the user can only display files on a directory.
-	
+# python-ftp v0.8.3
+This project allows users to host or access an FTP server, which can
+be configured inside of the program. 
+There are still some bugs to fix, but the client side is pretty much done.
+
 # Setting up virtualenv
 Use the command: 
 
@@ -13,3 +13,7 @@ The version used in this project is 3.6.5
 Use the command:
 	
 	pip install -r requirements.txt
+	
+# Disclaimer:
+This program doesn't use any encryption methods for storing passwords or
+files safely yet.
