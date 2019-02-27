@@ -19,7 +19,7 @@ class Terminal:
 		
 		print('Python FTP Manager')
 		print('---------------------------------')
-		print('Version 0.8.2-alpha, by CodeArch')
+		print('Version 0.8.3, by CodeArch')
 		print('\n')
 		
 	# Asks if the user wants to host a server or connect to an existing one
@@ -77,7 +77,7 @@ class Terminal:
 			elif access_level == 'RW':
 				
 				# Sets Read/Write permissions
-				self.user.permissions = 'elradfwMT'
+				self.user.permissions = 'elradfmwMT'
 				break
 			
 			else:

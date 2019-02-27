@@ -10,6 +10,12 @@ list - Displays a list of folders and files in the current directory
 size (file) - Displays the size (in bytes) of a file
 
 retr (file) - Downloads file from the server and stores it in the bin folder
+stor (filepath) (filename) - Stores the file in the determined path as the given filename
+
+dele (file) - Deletes the file
+rename (file/directory) (new_name) - renames the file or directory
+rmd (directory) - removes the given directory
+mkd (directory_name) - creates a new directory with the given name
 
 quit - Shuts the connection down and exits
 exit - Shuts the connection down and exits
