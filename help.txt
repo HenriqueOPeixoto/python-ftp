@@ -1,11 +1,15 @@
 WARNING: THIS FILE IS USED BY THE PROGRAM
-DO NOT MODIFY!!!
+ONLY MODIFY IF NECESSARY!!!
 ================================================
 
 FTP commands help guide:
 
 cwd (pathname) - Changes working directory
+pwd - Returns current working directory
 list - Displays a list of folders and files in the current directory
 size (file) - Displays the size (in bytes) of a file
+
+retr (file) - Downloads file from the server and stores it in the bin folder
+
 quit - Shuts the connection down and exits
 exit - Shuts the connection down and exits

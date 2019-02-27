@@ -1,5 +1,6 @@
 import ftplib
 import host
+import os
 
 class FTPClient:
 	
@@ -48,22 +49,36 @@ class FTPClient:
 			# Transforms the command in an array, in which the index one contains args
 			cmd = cmd.split(' ')
 			# Takes the argument of the command and changes the directory
-			self.ftp.cwd(cmd[1])
-		
+			# The try is here to ensure that only one argument is given
+			try:
+				if len(cmd) == 2:
+					self.ftp.cwd(cmd[1])
+				else:
+					raise IndexError
+			except IndexError:
+				print('Error: CWD takes 1 argument only. {} were given'.format(len(cmd) - 1))
+				
 		elif cmd.startswith('SIZE'):
 			cmd = cmd.split(' ')
-			self.ftp.voidcmd('TYPE I')
-			print('{} bytes'.format(self.ftp.size(cmd[1])))
+			print('{} bytes'.format(self.get_size(cmd[1])))
 		
 		elif cmd == 'HELP':
-			with open('help.txt', 'r') as help_file:
-				line_index = 0
-				for line in help_file:
-					# This is for hiding the help header
-					if line_index <= 3:
-						line_index += 1
-					else:
-						print(line, end='')
+			self.return_value = 'help'
+		
+		elif cmd == 'PWD':
+			print(self.ftp.pwd())
+			
+		elif cmd.startswith('RETR'):
+			cmd = cmd.split(' ')
+			with open('{0}{1}bin{1}{2}'.format(os.getcwd(), os.sep, cmd[1]), 'wb') as file:
+				self.ftp.retrbinary('RETR {}'.format(cmd[1]), file.write)
 		
 		else:
 			print('Command not found')
+	
+	def get_size(self, filename):
+		self.ftp.voidcmd('TYPE I')
+		return self.ftp.size(filename)
+			
+	def clear_return_value(self):
+		self.return_value = None

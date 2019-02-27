@@ -1,3 +1,4 @@
+import sys
 import terminal
 import ftp_server
 import ftp_client
@@ -33,6 +34,7 @@ def main():
 		client = ftp_client.FTPClient(host)
 		
 		while True:
+			print(client.ftp.pwd())
 			cmd = display.get_user_input()
 			
 			# Sometimes, a command might return a statement
@@ -41,6 +43,11 @@ def main():
 			print('\n')
 			if listener == 'exit':
 				break
+			elif listener == 'help':
+				display.display_help_message()
+				client.clear_return_value()
+			listener = ''
+			print('\n')
 
 if __name__ == '__main__':
 	main()
