@@ -25,8 +25,6 @@ def main():
 		
 	else:
 		
-		print('This is still under implementations and may be broken\n')
-		
 		# Initializes the client config sequence and receives the host object
 		host = display.display_client_config_sequence()
 		
