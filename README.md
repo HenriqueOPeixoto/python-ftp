@@ -33,7 +33,7 @@ All that's left to do is the build itself. For this, use the command (Windows):
 On most Unix systems, the command below should work:
 	
 	pyinstaller --clean -n python-ftp --add-data "help.txt:." --add-data "LICENSE:." __main__.py
-# Why clipyFTP
+# Why clipyFTP?
 "cli" stands for command line interface, "py" for Python and "FTP" for File Transfer Protocol
 
 # Warning:
