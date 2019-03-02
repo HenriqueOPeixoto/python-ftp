@@ -1,4 +1,4 @@
-# python-ftp v0.8.3
+# clipyFTP v0.8.3
 This project allows users to host or access an FTP server. 
 There are still some bugs to fix, but the client side is pretty much done.
 
@@ -33,6 +33,8 @@ All that's left to do is the build itself. For this, use the command (Windows):
 On most Unix systems, the command below should work:
 	
 	pyinstaller --clean -n python-ftp --add-data "help.txt:." --add-data "LICENSE:." __main__.py
+# Why clipyFTP
+"cli" stands for command line interface, "py" for Python and "FTP" for File Transfer Protocol
 
 # Warning:
 This program doesn't use any encryption methods for storing passwords or
