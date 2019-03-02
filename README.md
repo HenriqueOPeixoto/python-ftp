@@ -29,10 +29,10 @@ If you wish to build an executable for yourself, set up your virtual environment
 	pip install pyinstaller
 All that's left to do is the build itself. For this, use the command (Windows):
 
-	pyinstaller --clean -n python-ftp --add-data "help.txt;." --add-data "LICENSE;." __main__.py
+	pyinstaller --clean -n clipyFTP --add-data "help.txt;." --add-data "LICENSE;." __main__.py
 On most Unix systems, the command below should work:
 	
-	pyinstaller --clean -n python-ftp --add-data "help.txt:." --add-data "LICENSE:." __main__.py
+	pyinstaller --clean -n clipyFTP --add-data "help.txt:." --add-data "LICENSE:." __main__.py
 # Why clipyFTP?
 "cli" stands for command line interface, "py" for Python and "FTP" for File Transfer Protocol
 
