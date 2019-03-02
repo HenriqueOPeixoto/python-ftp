@@ -34,6 +34,6 @@ On most Unix systems, the command below should work:
 	
 	pyinstaller --clean -n python-ftp --add-data "help.txt:." --add-data "COPYING:." __main__.py
 
-# Disclaimer:
+# Warning:
 This program doesn't use any encryption methods for storing passwords or
 files safely yet. Use it on safe and private environments only.
