@@ -144,22 +144,25 @@ class Terminal:
         args_list.append(cmd.split(' ')[0].upper())
 
         for c in range(len(cmd)):
+            # For every char in c, this checks for the quote pos and adds
+            # them to a list
             if cmd.startswith('"', c):
                 quote_pos_list.append(c)
 
         for i in range(1, quotes, 2):
+            # This collects the indices saved on the quote_pos_list
+            # and splices the command at those positions to get the
+            # arguments
             args_list.append(
                 cmd[quote_pos_list[i - 1] + 1:quote_pos_list[i]])
-
-        print(quote_pos_list)
-        print(args_list)
 
         return args_list
 
     def get_user_input(self):
 
         cmd = input('> ')
-
+        
+        # If there are quotes, the program handles arguments differently
         if '"' in cmd:
             cmd = self.get_spaced_arg_split(cmd)
         else:
