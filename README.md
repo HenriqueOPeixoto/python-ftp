@@ -1,4 +1,4 @@
-# clipyFTP v0.8.3
+# clipyFTP v0.9.1
 This project allows users to host or access an FTP server. 
 There are still some bugs to fix, but the client side is pretty much done.
 

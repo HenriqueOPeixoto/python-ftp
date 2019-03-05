@@ -2,6 +2,11 @@
 * Code commenting
 * Manage exceptions
 
+# Changelog v0.9.1
+* The program now supports spaced arguments on the client side. That means
+you can now interact with files that have whitespace on their directories (
+by using quotes)
+
 # Changelog v0.8.3
 * Added STOR, DELE, RENAME, RMD and MKD commands
 * The client side is now fully usable (still has some bugs, though)
