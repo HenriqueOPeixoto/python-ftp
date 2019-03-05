@@ -20,7 +20,7 @@ class Terminal:
 
         print('Python FTP Manager')
         print('---------------------------------')
-        print('Version 0.8.3, by CodeArch')
+        print('Version 0.9.1, by CodeArch')
         print('\n')
 
     # Asks if the user wants to host a server or connect to an existing one
@@ -134,8 +134,36 @@ class Terminal:
                 else:
                     print(line, end='')
 
+    def get_spaced_arg_split(self, cmd):
+
+        quote_pos_list = []
+        args_list = []
+
+        quotes = cmd.count('"')
+
+        args_list.append(cmd.split(' ')[0].upper())
+
+        for c in range(len(cmd)):
+            if cmd.startswith('"', c):
+                quote_pos_list.append(c)
+
+        for i in range(1, quotes, 2):
+            args_list.append(
+                cmd[quote_pos_list[i - 1] + 1:quote_pos_list[i]])
+
+        print(quote_pos_list)
+        print(args_list)
+
+        return args_list
+
     def get_user_input(self):
 
-        command = input('> ')
+        cmd = input('> ')
 
-        return command
+        if '"' in cmd:
+            cmd = self.get_spaced_arg_split(cmd)
+        else:
+            cmd = cmd.split(' ')
+            cmd[0] = cmd[0].upper()
+
+        return cmd

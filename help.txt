@@ -19,3 +19,5 @@ mkd (directory_name) - creates a new directory with the given name
 
 quit - Shuts the connection down and exits
 exit - Shuts the connection down and exits
+
+Use quotes on all args when a file or a path contains whitespaces!

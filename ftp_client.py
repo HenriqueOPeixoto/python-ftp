@@ -43,11 +43,6 @@ class FTPClient:
 
         print('\n')
 
-        # This is for separating the command from it's arguments
-        # cmd[0] is the command and cmd[> 0] are it's arguments
-        cmd = cmd.split(' ')
-        cmd[0] = cmd[0].upper()
-
         if cmd[0] == 'LIST':
             self.ftp.dir()
 
