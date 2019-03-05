@@ -20,8 +20,8 @@ def main():
         # The server receives a user account in order to initialize
         server = ftp_server.FTPServer(user)
 
-        print('''\nThe server will start. In order to shut it down use Ctrl - C
-              (NT) or Ctrl - D(POSIX)\n''')
+        print('\nThe server will start. In order to shut it down use Ctrl - C',
+              '(NT) or Ctrl - D(POSIX)\n')
 
         server.start_server()
 
