@@ -161,7 +161,7 @@ class Terminal:
     def get_user_input(self):
 
         cmd = input('> ')
-        
+
         # If there are quotes, the program handles arguments differently
         if '"' in cmd:
             cmd = self.get_spaced_arg_split(cmd)
