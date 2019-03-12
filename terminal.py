@@ -19,7 +19,7 @@ class Terminal:
 
         print('python-ftp')
         print('---------------------------------')
-        print('Version 1.0.0, by CodeArch')
+        print('Version 0.9.1, by CodeArch')
         print('\n')
 
     def ask_if_server(self):
