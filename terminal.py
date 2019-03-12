@@ -15,15 +15,13 @@ class Terminal:
         self.user = user.User()
         self.host = host.Host()
 
-    # Shows welcome message
     def display_startup_sequence(self):
 
-        print('Python FTP Manager')
+        print('python-ftp')
         print('---------------------------------')
-        print('Version 0.9.1, by CodeArch')
+        print('Version 1.0.0, by CodeArch')
         print('\n')
 
-    # Asks if the user wants to host a server or connect to an existing one
     def ask_if_server(self):
 
         print('Choose an option from below: ')
@@ -33,91 +31,87 @@ class Terminal:
         print('\n')
         print('Insert option: ', end='')
 
-        user_option = input()
+        while True:
 
-        if user_option == '1':
-            self.user.is_server = True
-        elif user_option == '2':
-            self.user.is_server = False
+            user_option = input()
+
+            if user_option == '1':
+                self.user.is_server = True
+                break
+            elif user_option == '2':
+                self.user.is_server = False
+                break
+            else:
+                print('Use [1] for Server and [2] for Client: ')
 
         return self.user.is_server
 
     def display_server_config_sequence(self):
 
-        print('Insert username: ', end='')
-        self.user.username = input()
-
-        print('Insert password: ', end='')
-        self.user.password = input()
+        self.user.username = input('Insert username: ')
+        self.user.password = input('Insert password: ')
 
         while True:
 
             try:
-                print('Insert directory to share: ', end='')
-                self.user.dir_ = input()
+                self.user.dir_ = input('Insert directory to share: ')
 
-                # Checking if a directory exists. If false, raise
-                # NotADirectoryError. If it exists, break the loop and continue
-                # operations
                 if os.path.isdir(self.user.dir_) is False:
                     raise NotADirectoryError from OSError
                 break
             except NotADirectoryError:
                 print('Error: Not a directory or directory not found')
 
-        print('Insert level of access (R for read/RW for Read/Write): ',
-              end='')
-        access_level = input().upper()
         while True:
+            access_level = input('Insert level of access ' +
+                                 '(R for read/RW for Read/Write): ').upper()
+
+            # Each character from the permissions variable allows a different
+            # command to be executed. Check the pyftpdlib docs, to
+            # understand what they do.
+            # https://pyftpdlib.readthedocs.io/en/latest/
 
             if access_level == 'R':
 
-                # Sets Read Only permissions
                 self.user.permissions = 'elr'
                 break
 
             elif access_level == 'RW':
 
-                # Sets Read/Write permissions
                 self.user.permissions = 'elradfmwMT'
                 break
 
-            else:
-
-                # Checks if the user inserted something else and asks again
-                print('Use R for read and RW for Read/Write: ', end='')
-                access_level = input().upper()
-
-        # Returns user account information to be used as hosting parameters
         return self.user
 
     def display_client_config_sequence(self):
 
-        print('Insert address (default = 0.0.0.0): ', end='')
-        address = input()
-
-        print('Insert port (default = 2121): ', end='')
-        port = input()
+        address = input('Insert address (default = 0.0.0.0): ')
 
         if address == '':
             address = '0.0.0.0'
 
-        if port == '':
-            port = 2121
+        while True:
+            try:
 
-        else:
-            # The statement below will malfunction if the user types a string.
-            # An exception needs to be added here
-            port = int(port)
+                port = input('Insert port (default = 2121): ')
 
-        print('Insert username (default = None): ', end='')
-        username = input()
+                if port == '':
+                    port = 2121
+                    break
 
-        print('Insert password (default = None): ', end='')
-        password = input()
+                elif port.isdecimal():
+                    port = int(port)
+                    break
 
-        # Sets all the information necessary in the Host class and returns
-        # these values
+                else:
+                    raise ValueError('The port is an integer number')
+
+            except ValueError as error:
+                print(error)
+
+        username = input('Insert username (default = None): ')
+        password = input('Insert password (default = None): ')
+
         self.host.address = address
         self.host.port = port
         self.host.username = username
@@ -129,32 +123,30 @@ class Terminal:
         with open('help.txt', 'r') as help_file:
             line_index = 0
             for line in help_file:
+                # The if statement below is here to skip the "help.txt"
+                # file header which is only supposed to be seen in a
+                # normal text editor
                 if line_index <= 3:
                     line_index += 1
                 else:
                     print(line, end='')
 
-    def get_spaced_arg_split(self, cmd):
+        print('\n')
 
-        quote_pos_list = []
+    def get_arguments_with_quotes(self, cmd):
+
+        quote_index_list = []
         args_list = []
-
-        quotes = cmd.count('"')
 
         args_list.append(cmd.split(' ')[0].upper())
 
         for c in range(len(cmd)):
-            # For every char in c, this checks for the quote pos and adds
-            # them to a list
             if cmd.startswith('"', c):
-                quote_pos_list.append(c)
+                quote_index_list.append(c)
 
-        for i in range(1, quotes, 2):
-            # This collects the indices saved on the quote_pos_list
-            # and splices the command at those positions to get the
-            # arguments
+        for i in range(1, cmd.count('"'), 2):
             args_list.append(
-                cmd[quote_pos_list[i - 1] + 1:quote_pos_list[i]])
+                cmd[quote_index_list[i - 1] + 1:quote_index_list[i]])
 
         return args_list
 
@@ -162,9 +154,8 @@ class Terminal:
 
         cmd = input('> ')
 
-        # If there are quotes, the program handles arguments differently
         if '"' in cmd:
-            cmd = self.get_spaced_arg_split(cmd)
+            cmd = self.get_arguments_with_quotes(cmd)
         else:
             cmd = cmd.split(' ')
             cmd[0] = cmd[0].upper()
