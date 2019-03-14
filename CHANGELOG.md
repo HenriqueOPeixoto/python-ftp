@@ -1,7 +1,3 @@
-# TODO
-* Code commenting
-* Manage exceptions
-
 # Changelog v0.9.1
 * The program now supports spaced arguments on the client side. That means
 you can now interact with files that have whitespace on their directories (

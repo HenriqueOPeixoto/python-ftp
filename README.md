@@ -36,4 +36,4 @@ On most Unix systems, the command below should work:
 
 # Warning:
 This program doesn't use any encryption methods for storing passwords or
-files safely yet. Use it on safe and private environments only.
+transfering files safely yet. Use it on safe and private environments only.
