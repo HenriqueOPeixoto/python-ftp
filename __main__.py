@@ -25,13 +25,13 @@ def main():
     else:
 
         host = display.display_client_config_sequence()
-
         client = ftp_client.FTPClient(host)
 
         while True:
 
             print(client.ftp.pwd())
             cmd = display.get_user_input()
+            print('\n')
             client.execute_cmd(cmd)
             listener = client.get_return_value()
 

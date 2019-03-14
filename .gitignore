@@ -9,3 +9,6 @@ bin/
 dist/
 build/
 *.spec
+
+# Debugging batches
+*.bat
