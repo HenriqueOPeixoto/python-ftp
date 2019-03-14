@@ -14,16 +14,16 @@ class FTPServer:
     def __init__(self, user):
 
         authorizer = DummyAuthorizer()
-        
+
         authorizer.add_user(
             user.username,
             user.password,
             user.dir_,
             perm=user.permissions)
-        
+
         handler = FTPHandler
         handler.authorizer = authorizer
-        
+
         handler.banner = 'Welcome to a Python FTP Server!'
 
         address = (str(ip_retriever.get_ip_address()), 2121)
