@@ -19,7 +19,7 @@ class Terminal:
 
         print('python-ftp')
         print('---------------------------------')
-        print('Version 0.9.1, by CodeArch')
+        print('Version 1.0.0, by CodeArch')
         print('\n')
 
     def ask_if_server(self):
@@ -152,7 +152,7 @@ class Terminal:
 
     def get_user_input(self):
 
-        cmd = input('> ')
+        cmd = input('> ').strip()
 
         if '"' in cmd:
             cmd = self.get_arguments_with_quotes(cmd)
