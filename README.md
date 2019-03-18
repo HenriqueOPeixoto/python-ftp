@@ -18,10 +18,6 @@ Use the command (with your virtual environment activated):
 	
 	pip install -r requirements.txt
 	
-# Known bugs (will be fixed in later versions)
-* Due to the way command args are handled, for now, the program does not allow interaction with files that have spaces on their name. This happens because the program separates arguments using spaces.
-* Because exceptions are still not handled correctly, almost any unexpected behaviour causes the program to crash, thus closing itself.
-
 # How to build
 If you wish to build an executable for yourself, set up your virtual environment and activate it, then download PyInstaller from pip (if you downloaded from "requirements.txt" you can skip this step)
 	
