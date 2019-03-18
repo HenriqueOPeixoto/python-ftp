@@ -24,8 +24,6 @@ class FTPServer:
         handler = FTPHandler
         handler.authorizer = authorizer
 
-        handler.banner = 'Welcome to a Python FTP Server!'
-
         address = (str(ip_retriever.get_ip_address()), 2121)
         self.server = ThreadedFTPServer(address, handler)
 
