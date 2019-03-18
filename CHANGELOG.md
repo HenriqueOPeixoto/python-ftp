@@ -1,3 +1,8 @@
+# Changelog v1.0.0
+* Many exceptions are now handled and the program should only shut down
+when it's actually necessary
+* The code is now even more readable and many unecessary comments were removed
+
 # Changelog v0.9.1
 * The program now supports spaced arguments on the client side. That means
 you can now interact with files that have whitespace on their directories (

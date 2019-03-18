@@ -1,6 +1,5 @@
-# python-ftp v0.9.1
+# python-ftp v1.0.0
 This project allows users to host or access an FTP server. 
-There are still some bugs to fix, but the client side is pretty much done.
 
 # How to use
 Setting up a server is pretty straight forward. Just follow the on-screen prompts and the server should be up and running. The client part, however, is a little bit more complicated. See "help.txt" or type "help" on the command line for more information.

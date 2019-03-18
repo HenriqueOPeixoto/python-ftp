@@ -28,18 +28,22 @@ class FTPClient:
     def clear_return_value(self):
         self.return_value = None
 
-    def get_size(self, filename):
-        # The command below ensures binary mode is used in order to
-        # get size. It cannot be used in folders.
-        self.ftp.voidcmd('TYPE I')
-        return self.ftp.size(filename)
+    def get_size(self, cmd):
+        try:
+            # The command below ensures binary mode is used in order to
+            # get size. It cannot be used in folders.
+            self.ftp.voidcmd('TYPE I')
+            size = self.ftp.size(cmd[1])
+            print('{} bytes'.format(size))
+        except ftplib.error_perm as e:
+            print(e)
+        except IndexError:
+            print('SIZE command takes 1 argument. {} were given'.format(
+                  (len(cmd) - 1)))
 
     def change_directory(self, cmd):
         try:
-            if len(cmd) == 2:
-                self.ftp.cwd(cmd[1])
-            else:
-                raise IndexError
+            self.ftp.cwd(cmd[1])
         except IndexError:
             print(
                 'Error: CWD takes 1 argument only. {} were given'.format(
@@ -55,10 +59,55 @@ class FTPClient:
         except ftplib.error_perm as e:
             os.remove('{0}{1}bin{1}{2}'.format(os.getcwd(), os.sep, cmd[1]))
             print(e)
+        except IndexError:
+            print('RETR command takes 1 argument. {} were given.'.format(
+                  (len(cmd) - 1)))
 
     def store_file_on_server(self, cmd):
-        with open(cmd[1], 'rb') as file:
-            self.ftp.storbinary('STOR {}'.format(cmd[2]), file)
+        try:
+            with open(cmd[1], 'rb') as file:
+                self.ftp.storbinary('STOR {}'.format(cmd[2]), file)
+        except (ftplib.error_perm, FileNotFoundError) as e:
+            print(e)
+        except IndexError:
+            print('STOR command takes 2 arguments. {} were given'.format(
+                  (len(cmd) - 1)))
+
+    def delete_file(self, cmd):
+        try:
+            self.ftp.delete(cmd[1])
+        except ftplib.error_perm as e:
+            print(e)
+        except IndexError:
+            print('DELE takes 1 argument. {} were given.'.format(
+                  (len(cmd) - 1)))
+
+    def create_directory(self, cmd):
+        try:
+            self.ftp.mkd(cmd[1])
+        except ftplib.error_perm as e:
+            print(e)
+        except IndexError:
+            print('MKD takes 1 argument. {} were given'.format(
+                  (len(cmd) - 1)))
+
+    def remove_directory(self, cmd):
+        try:
+            self.ftp.rmd(cmd[1])
+        except ftplib.error_perm as e:
+            print(e)
+        except IndexError:
+            print('RMD takes 1 argument. {} were given'.format(
+                  (len(cmd) - 1)))
+
+    def rename_file_or_directory(self, cmd):
+        try:
+            self.ftp.rename(cmd[1], cmd[2])
+        except ftplib.error_perm as e:
+            print(e)
+        except IndexError:
+            print('RENAME takes 2 arguments. {} were given'.format(
+                  (len(cmd) - 1)))
 
     def execute_cmd(self, cmd):
 
@@ -72,8 +121,8 @@ class FTPClient:
         elif cmd[0] == 'CWD':
             self.change_directory(cmd)
 
-        elif cmd[0] == ('SIZE'):
-            print('{} bytes'.format(self.get_size(cmd[1])))
+        elif cmd[0] == 'SIZE':
+            self.get_size(cmd)
 
         elif cmd[0] == 'HELP':
             self.return_value = 'help'
@@ -85,16 +134,16 @@ class FTPClient:
             self.retrieve_file(cmd)
 
         elif cmd[0] == 'MKD':
-            self.ftp.mkd(cmd[1])
+            self.create_directory(cmd)
 
         elif cmd[0] == 'RMD':
-            self.ftp.rmd(cmd[1])
+            self.remove_directory(cmd)
 
         elif cmd[0] == 'RENAME':
-            self.ftp.rename(cmd[1], cmd[2])
+            self.rename_file_or_directory(cmd)
 
         elif cmd[0] == 'DELE':
-            self.ftp.delete(cmd[1])
+            self.delete_file(cmd)
 
         elif cmd[0] == 'STOR':
             self.store_file_on_server(cmd)

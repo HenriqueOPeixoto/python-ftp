@@ -10,5 +10,5 @@ dist/
 build/
 *.spec
 
-# Debugging batches
+# Batch files created for testing
 *.bat
