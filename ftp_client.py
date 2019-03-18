@@ -40,7 +40,7 @@ class FTPClient:
         except IndexError:
             print('SIZE command takes 1 argument. {} were given'.format(
                   (len(cmd) - 1)))
-                  
+
     def change_directory(self, cmd):
         try:
             self.ftp.cwd(cmd[1])
@@ -62,7 +62,7 @@ class FTPClient:
         except IndexError:
             print('RETR command takes 1 argument. {} were given.'.format(
                   (len(cmd) - 1)))
-        
+
     def store_file_on_server(self, cmd):
         try:
             with open(cmd[1], 'rb') as file:
@@ -72,7 +72,7 @@ class FTPClient:
         except IndexError:
             print('STOR command takes 2 arguments. {} were given'.format(
                   (len(cmd) - 1)))
-                  
+
     def delete_file(self, cmd):
         try:
             self.ftp.delete(cmd[1])
@@ -81,7 +81,7 @@ class FTPClient:
         except IndexError:
             print('DELE takes 1 argument. {} were given.'.format(
                   (len(cmd) - 1)))
-                  
+
     def create_directory(self, cmd):
         try:
             self.ftp.mkd(cmd[1])
@@ -99,7 +99,7 @@ class FTPClient:
         except IndexError:
             print('RMD takes 1 argument. {} were given'.format(
                   (len(cmd) - 1)))
-    
+
     def rename_file_or_directory(self, cmd):
         try:
             self.ftp.rename(cmd[1], cmd[2])
@@ -108,7 +108,7 @@ class FTPClient:
         except IndexError:
             print('RENAME takes 2 arguments. {} were given'.format(
                   (len(cmd) - 1)))
-                  
+
     def execute_cmd(self, cmd):
 
         if cmd[0] == 'LIST':
